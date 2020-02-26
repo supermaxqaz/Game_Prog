@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GPRO-FW-Launcher", "..\..\GPRO-FW-Launcher\GPRO-FW-Launcher.vcxproj", "{158EE8B2-0B97-423C-BC9E-8ED5BE594B37}"
+	ProjectSection(ProjectDependencies) = postProject
+		{531CC616-3453-4C6E-B93F-0D70D1693784} = {531CC616-3453-4C6E-B93F-0D70D1693784}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrAmEwOrK", "..\..\FrAmEwOrK\FrAmEwOrK.vcxproj", "{531CC616-3453-4C6E-B93F-0D70D1693784}"
 EndProject
