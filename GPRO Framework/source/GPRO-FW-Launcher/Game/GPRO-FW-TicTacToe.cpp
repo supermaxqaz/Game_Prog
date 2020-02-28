@@ -62,26 +62,42 @@ inline gs_tictactoe_index gs_tictactoe_reset(gs_tictactoe game)
 //-----------------------------------------------------------------------------
 // DEFINITIONS
 
+void drawBoard(gs_tictactoe const game)
+{
+	for (int i = 0; i < GS_TICTACTOE_BOARD_HEIGHT; i++)
+	{
+		for (int j = 0; j < GS_TICTACTOE_BOARD_WIDTH; j++)
+		{
+			cout << gs_tictactoe_getSpaceState(game, j, i) << " ";
+		}
+		cout << endl;
+	}
+}
+
 int launchTicTacToe()
 {
-	gs_tictactoe game = { 0 };
+	gs_tictactoe game; //= { 0 };
 
 	gs_tictactoe_reset(game);
 
+	gs_tictactoe_space_state player = gs_tictactoe_space_o;
 	bool playerWon = false;
-	gs_tictactoe_space_state winner;
-		
-	
+	gs_tictactoe_space_state winner;	
+	int playerRow, playerColumn;
 	
 	while (!playerWon)
 	{
-		for (int i = 0; i < GS_TICTACTOE_BOARD_HEIGHT; i++)
+		drawBoard(game);
+
+		cout << "Player " << player << "'s turn" << endl;
+		cout << "Which row would you like to place your piece? ";
+		cin >> playerRow;
+		cout << "Which column would you like to place your piece? ";
+		cin >> playerColumn;
+
+		while (gs_tictactoe_getSpaceState(game, playerColumn, playerRow) == gs_tictactoe_space_invalid)
 		{
-			for (int j = 0; j < GS_TICTACTOE_BOARD_WIDTH; j++)
-			{
-				cout << gs_tictactoe_getSpaceState(game, j, i) << " ";
-			}
-			cout << endl;
+
 		}
 	}
 
