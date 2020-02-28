@@ -1,6 +1,8 @@
 
 #include <stdio.h>
+#include <iostream>
 
+using namespace std;
 
 //-----------------------------------------------------------------------------
 // DECLARATIONS
@@ -66,7 +68,22 @@ int launchTicTacToe()
 
 	gs_tictactoe_reset(game);
 
-
+	bool playerWon = false;
+	gs_tictactoe_space_state winner;
+		
+	
+	
+	while (!playerWon)
+	{
+		for (int i = 0; i < GS_TICTACTOE_BOARD_HEIGHT; i++)
+		{
+			for (int j = 0; j < GS_TICTACTOE_BOARD_WIDTH; j++)
+			{
+				cout << gs_tictactoe_getSpaceState(game, j, i) << " ";
+			}
+			cout << endl;
+		}
+	}
 
 	return 0;
 }
