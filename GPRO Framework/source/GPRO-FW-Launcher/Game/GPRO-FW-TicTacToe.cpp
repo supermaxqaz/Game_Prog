@@ -68,38 +68,129 @@ void drawBoard(gs_tictactoe const game)
 	{
 		for (int j = 0; j < GS_TICTACTOE_BOARD_WIDTH; j++)
 		{
-			cout << gs_tictactoe_getSpaceState(game, j, i) << " ";
+			if (gs_tictactoe_getSpaceState(game, j, i) == 1)
+			{
+				cout << "O ";
+			}
+			else if (gs_tictactoe_getSpaceState(game, j, i) == 2)
+			{
+				cout << "X ";
+			}
+			else
+			{
+				cout << "- ";
+			}
 		}
 		cout << endl;
 	}
+}
+
+bool tieState(gs_tictactoe const game)
+{
+	for (int i = 0; i < GS_TICTACTOE_BOARD_HEIGHT; i++)
+	{
+		for (int j = 0; j < GS_TICTACTOE_BOARD_WIDTH; j++)
+		{
+			if (gs_tictactoe_getSpaceState(game, j, i) == gs_tictactoe_space_open)
+			{
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 int launchTicTacToe()
 {
 	gs_tictactoe game; //= { 0 };
 
-	gs_tictactoe_reset(game);
+	char playAgain = 'y';
 
-	gs_tictactoe_space_state player = gs_tictactoe_space_o;
-	bool playerWon = false;
-	gs_tictactoe_space_state winner;	
-	int playerRow, playerColumn;
+	do {
+		gs_tictactoe_reset(game);
+
+		gs_tictactoe_space_state player = gs_tictactoe_space_o;
+		bool playerWon = false;
+		gs_tictactoe_space_state winner = gs_tictactoe_space_invalid;
+		bool tie = false;
+		int playerRow, playerColumn;
 	
-	while (!playerWon)
-	{
-		drawBoard(game);
-
-		cout << "Player " << player << "'s turn" << endl;
-		cout << "Which row would you like to place your piece? ";
-		cin >> playerRow;
-		cout << "Which column would you like to place your piece? ";
-		cin >> playerColumn;
-
-		while (gs_tictactoe_getSpaceState(game, playerColumn, playerRow) == gs_tictactoe_space_invalid)
+		while (!playerWon && !tie)
 		{
+			drawBoard(game);
 
+			cout << "Player " << player << "'s turn" << endl;
+			cout << "Which column would you like to place your piece? ";
+			cin >> playerColumn;
+			playerColumn--;
+			cout << "Which row would you like to place your piece? ";
+			cin >> playerRow;
+			playerRow--;
+
+			while (gs_tictactoe_getSpaceState(game, playerColumn, playerRow) != gs_tictactoe_space_open)
+			{
+				cout << "That is not a valid space" << endl;
+				cout << "Which row would you like to place your piece? ";
+				cin >> playerRow;
+				playerRow--;
+				cout << "Which column would you like to place your piece? ";
+				cin >> playerColumn;
+				playerColumn--;
+			}
+
+			game[playerColumn][playerRow] = player;
+
+			for (int i = 0; i < GS_TICTACTOE_BOARD_WIDTH; i++)
+			{
+				if (game[0][i] == game[1][i] && game[1][i] == game[2][i] && game[0][i] != gs_tictactoe_space_open)
+				{
+					playerWon = true;
+					winner = player;
+				}
+				else if (game[i][0] == game[i][1] && game[i][1] == game[i][2] && game[i][0] != gs_tictactoe_space_open)
+				{
+					playerWon = true;
+					winner = player;
+				}
+			}
+			if (game[0][0] == game[1][1] && game[1][1] == game[2][2] && game[0][0] != gs_tictactoe_space_open)
+			{
+				playerWon = true;
+				winner = player;
+			}
+			else if (game[2][0] == game[1][1] && game[1][1] == game[0][2] && game[2][0] != gs_tictactoe_space_open)
+			{
+				playerWon = true;
+				winner = player;
+			}
+
+			tie = tieState(game);
+
+			if (player == gs_tictactoe_space_o)
+			{
+				player = gs_tictactoe_space_x;
+			}
+			else if (player == gs_tictactoe_space_x)
+			{
+				player = gs_tictactoe_space_o;
+			}
 		}
-	}
+
+		drawBoard(game);
+		if (playerWon)
+		{
+			cout << "Congratulations! Player " << winner << " wins!" << endl << endl;
+		}
+		else if (tie)
+		{
+			cout << "The game was a tie!" << endl << endl;
+		}
+
+		cout << "Would you like to play again? (y/n) ";
+		cin >> playAgain;
+		playAgain = tolower(playAgain);
+
+	} while (playAgain == 'y');
 
 	return 0;
 }

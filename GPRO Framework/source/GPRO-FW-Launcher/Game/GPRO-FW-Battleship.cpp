@@ -1,6 +1,8 @@
 
 #include <stdio.h>
+#include <iostream>
 
+using namespace std;
 
 //-----------------------------------------------------------------------------
 // DECLARATIONS
@@ -68,13 +70,56 @@ inline gs_battleship_index gs_battleship_reset(gs_battleship game)
 //-----------------------------------------------------------------------------
 // DEFINITIONS
 
+void drawBoard(gs_battleship const game, gs_battleship_index const player)
+{
+	for (int i = 0; i < GS_BATTLESHIP_BOARD_HEIGHT; i++)
+	{
+		for (int j = 0; j < GS_BATTLESHIP_BOARD_WIDTH; j++)
+		{
+			if (gs_checkers_getSpaceState(game, player, j, i) == 1)
+			{
+				cout << "O ";
+			}
+			else if (gs_checkers_getSpaceState(game, player, j, i) == 2)
+			{
+				cout << "X ";
+			}
+			else
+			{
+				cout << "- ";
+			}
+		}
+		cout << endl;
+	}
+}
+
 int launchBattleship()
 {
-	gs_battleship game = { 0 };
+	gs_battleship gamePlayer1;// = { 0 };
+	gs_battleship gamePlayer2;
 
-	gs_battleship_reset(game);
+	gs_battleship_reset(gamePlayer1);
+	gs_battleship_reset(gamePlayer2);
 
+	cout << "Player 1 Board: " << endl;
+	drawBoard(gamePlayer1, 1);
 
+	cout << endl;
+
+	cout << "Player 2 Board: " << endl;
+	drawBoard(gamePlayer2, 1);
+
+	int shipRow, shipColumn;
+	cout << "You are now placing the Patrol ship." << endl;
+	cout << "Select a starting point (row, column): ";
+	cin >> shipRow >> shipColumn;
+	// create "function" to place all of the ships
+
+	// create full game loop
+
+	// printing during game?
+
+	// profit
 
 	return 0;
 }
