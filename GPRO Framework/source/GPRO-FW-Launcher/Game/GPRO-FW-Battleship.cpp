@@ -76,13 +76,9 @@ void drawBoard(gs_battleship const game, gs_battleship_index const player)
 	{
 		for (int j = 0; j < GS_BATTLESHIP_BOARD_WIDTH; j++)
 		{
-			if (gs_checkers_getSpaceState(game, player, j, i) == 1)
+			if (gs_checkers_getSpaceState(game, player, j, i) == gs_battleship_space_patrol2)
 			{
-				cout << "O ";
-			}
-			else if (gs_checkers_getSpaceState(game, player, j, i) == 2)
-			{
-				cout << "X ";
+				cout << "P ";
 			}
 			else
 			{
@@ -93,26 +89,123 @@ void drawBoard(gs_battleship const game, gs_battleship_index const player)
 	}
 }
 
+void placeShips(gs_battleship game, gs_battleship_index const player)
+{
+	int shipRowStart, shipColumnStart, shipRowEnd, shipColumnEnd;
+	cout << "You are now placing the Patrol." << endl;
+	cout << "Select a starting point (row): ";
+	cin >> shipRowStart;
+	cout << "Select a starting point (column): ";
+	cin >> shipColumnStart;
+	cout << "Select an ending point (row): ";
+	cin >> shipRowEnd;
+	cout << "Select an ending point (column): ";
+	cin >> shipColumnEnd;
+	if (sqrt(pow(shipRowEnd - shipRowStart, 2) + pow(shipColumnEnd - shipColumnStart, 2)) != 1)
+	{
+		cout << "Those points will not work." << endl;
+		cout << "You are now placing the Patrol." << endl;
+		cout << "Select a starting point (row, column): ";
+		cin >> shipRowStart >> shipColumnStart;
+		cout << "Select an ending point (row, column): ";
+		cin >> shipRowEnd >> shipColumnEnd;
+	}
+	shipRowStart--;
+	shipRowEnd--;
+	shipColumnStart--;
+	shipColumnEnd--;
+	if (shipRowEnd != shipRowStart)
+	{
+		for (int i = shipColumnStart; i < shipColumnEnd; i++)
+		{
+			gs_checkers_setSpaceState(game, gs_battleship_space_patrol2, 1, i, shipRowStart);
+		}
+	}
+	else if (shipColumnEnd != shipColumnStart)
+	{
+		for (int i = shipRowStart; i < shipRowEnd; i++)
+		{
+			gs_checkers_setSpaceState(game, gs_battleship_space_patrol2, 1, shipColumnStart, i);
+		}
+	}
+	drawBoard(game, 1);
+
+	/*cout << "You are now placing the Submarine." << endl;
+	cout << "Select a starting point (row, column): ";
+	cin >> shipRowStart >> shipColumnStart;
+	cout << "Select an ending point (row, column): ";
+	cin >> shipRowEnd >> shipColumnEnd;
+	if (sqrt(pow(shipRowEnd - shipRowStart, 2) + pow(shipColumnEnd - shipColumnStart, 2)) != 3)
+	{
+		cout << "Those points will not work." << endl;
+		cout << "You are now placing the Submarine." << endl;
+		cout << "Select a starting point (row, column): ";
+		cin >> shipRowStart >> shipColumnStart;
+		cout << "Select an ending point (row, column): ";
+		cin >> shipRowEnd >> shipColumnEnd;
+	}
+
+	cout << "You are now placing the Destroyer." << endl;
+	cout << "Select a starting point (row, column): ";
+	cin >> shipRowStart >> shipColumnStart;
+	cout << "Select an ending point (row, column): ";
+	cin >> shipRowEnd >> shipColumnEnd;
+	if (sqrt(pow(shipRowEnd - shipRowStart, 2) + pow(shipColumnEnd - shipColumnStart, 2)) != 3)
+	{
+		cout << "Those points will not work." << endl;
+		cout << "You are now placing the Destroyer." << endl;
+		cout << "Select a starting point (row, column): ";
+		cin >> shipRowStart >> shipColumnStart;
+		cout << "Select an ending point (row, column): ";
+		cin >> shipRowEnd >> shipColumnEnd;
+	}
+
+	cout << "You are now placing the Battleship." << endl;
+	cout << "Select a starting point (row, column): ";
+	cin >> shipRowStart >> shipColumnStart;
+	cout << "Select an ending point (row, column): ";
+	cin >> shipRowEnd >> shipColumnEnd;
+	if (sqrt(pow(shipRowEnd - shipRowStart, 2) + pow(shipColumnEnd - shipColumnStart, 2)) != 4)
+	{
+		cout << "Those points will not work." << endl;
+		cout << "You are now placing the Battleship." << endl;
+		cout << "Select a starting point (row, column): ";
+		cin >> shipRowStart >> shipColumnStart;
+		cout << "Select an ending point (row, column): ";
+		cin >> shipRowEnd >> shipColumnEnd;
+	}
+
+	cout << "You are now placing the Carrier." << endl;
+	cout << "Select a starting point (row, column): ";
+	cin >> shipRowStart >> shipColumnStart;
+	cout << "Select an ending point (row, column): ";
+	cin >> shipRowEnd >> shipColumnEnd;
+	if (sqrt(pow(shipRowEnd - shipRowStart, 2) + pow(shipColumnEnd - shipColumnStart, 2)) != 5)
+	{
+		cout << "Those points will not work." << endl;
+		cout << "You are now placing the Carrier." << endl;
+		cout << "Select a starting point (row, column): ";
+		cin >> shipRowStart >> shipColumnStart;
+		cout << "Select an ending point (row, column): ";
+		cin >> shipRowEnd >> shipColumnEnd;
+	}*/
+}
+
 int launchBattleship()
 {
-	gs_battleship gamePlayer1;// = { 0 };
-	gs_battleship gamePlayer2;
+	gs_battleship game;// = { 0 };
 
-	gs_battleship_reset(gamePlayer1);
-	gs_battleship_reset(gamePlayer2);
+	gs_battleship_reset(game);
 
 	cout << "Player 1 Board: " << endl;
-	drawBoard(gamePlayer1, 1);
+	drawBoard(game, 1);
 
 	cout << endl;
 
 	cout << "Player 2 Board: " << endl;
-	drawBoard(gamePlayer2, 1);
+	drawBoard(game, 2);
 
-	int shipRow, shipColumn;
-	cout << "You are now placing the Patrol ship." << endl;
-	cout << "Select a starting point (row, column): ";
-	cin >> shipRow >> shipColumn;
+	placeShips(game, 1);
 	// create "function" to place all of the ships
 
 	// create full game loop

@@ -8,7 +8,7 @@ int launchTicTacToe();
 int launchBattleship();
 int main()
 {
-	int choice = 0;
+/*	int choice = 0;
 cout << "Do you want to play TicTacToe (1) or Battleship (2)?" << endl;
 	cin >> choice;
 	if (choice == 1)
@@ -16,8 +16,8 @@ cout << "Do you want to play TicTacToe (1) or Battleship (2)?" << endl;
 		launchTicTacToe();
 	}
 	else if (choice == 2)
-	{
+	{*/
 		launchBattleship();
-	}
-	cout << "" << endl;
+//	}
+//	cout << "" << endl;
 }
