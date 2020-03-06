@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GPRO-FW-Launcher", "..\..\GPRO-FW-Launcher\GPRO-FW-Launcher.vcxproj", "{158EE8B2-0B97-423C-BC9E-8ED5BE594B37}"
+	ProjectSection(ProjectDependencies) = postProject
+		{531CC616-3453-4C6E-B93F-0D70D1693784} = {531CC616-3453-4C6E-B93F-0D70D1693784}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrAmEwOrK", "..\..\FrAmEwOrK\FrAmEwOrK.vcxproj", "{531CC616-3453-4C6E-B93F-0D70D1693784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{158EE8B2-0B97-423C-BC9E-8ED5BE594B37}.Release|x64.Build.0 = Release|x64
 		{158EE8B2-0B97-423C-BC9E-8ED5BE594B37}.Release|x86.ActiveCfg = Release|Win32
 		{158EE8B2-0B97-423C-BC9E-8ED5BE594B37}.Release|x86.Build.0 = Release|Win32
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Debug|x64.ActiveCfg = Debug|x64
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Debug|x64.Build.0 = Debug|x64
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Debug|x86.ActiveCfg = Debug|Win32
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Debug|x86.Build.0 = Debug|Win32
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Release|x64.ActiveCfg = Release|x64
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Release|x64.Build.0 = Release|x64
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Release|x86.ActiveCfg = Release|Win32
+		{531CC616-3453-4C6E-B93F-0D70D1693784}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
