@@ -118,14 +118,14 @@ void placeShips(gs_battleship game, gs_battleship_index const player)
 	{
 		for (int i = shipColumnStart; i < shipColumnEnd; i++)
 		{
-			gs_checkers_setSpaceState(game, gs_battleship_space_patrol2, 1, i, shipRowStart);
+			gs_checkers_setSpaceState(game, gs_battleship_space_patrol2, player, i, shipRowStart);
 		}
 	}
 	else if (shipColumnEnd != shipColumnStart)
 	{
 		for (int i = shipRowStart; i < shipRowEnd; i++)
 		{
-			gs_checkers_setSpaceState(game, gs_battleship_space_patrol2, 1, shipColumnStart, i);
+			gs_checkers_setSpaceState(game, gs_battleship_space_patrol2, player, shipColumnStart, i);
 		}
 	}
 	drawBoard(game, 1);
